@@ -40,7 +40,6 @@ $(document).ready( function () {
         var values = {};
         $inputs.each(function() {
             values[this.name] = $(this).val();
-            alert($(this).val());
         });
         user2 = {};
         user2['name'] = values["user"];
@@ -50,7 +49,7 @@ $(document).ready( function () {
             type: "POST",
             contentType: "application/json",
             url: "/bookTry" + '/' + id + '/' + values['date1'] + '/' + values['date2'],
-            data: JSON.stringify(user2),
+            data: JSON.stringify(user2)
 
         });
 
@@ -66,7 +65,6 @@ $(document).ready( function () {
     $('#myTable').on( 'click', 'button', function () {
         var data1 = table.row( $(this).parents('tr') ).data();
         id = data1["id"];
-        alert( data1["id"] +"'s salary is: ");
     } );
 
     // var table = $('#myTable').DataTable();
@@ -105,13 +103,14 @@ $(document).ready( function () {
             type: "GET",
             dataType: "json",
             success: function (json) {
-                console.log(json["bikes"]);
+                console.log(json["availableBikes"]);
                 table = $("#myTable").DataTable({
-                        data: json["bikes"],
+                        data: json["availableBikes"],
                         columns: [
                             {data: 'name'},
                             {data: 'battery'},
                             {data: 'id'},
+                            {data: 'available'},
                             {
                                 data: function () {
                                     return "<button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Book</button>";

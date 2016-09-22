@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -8,11 +9,8 @@ import java.util.Random;
  */
 public class BookingService {
 
-
-
-
-    private ArrayList<ParkingSpot> parkingSpots;
-    private ArrayList<Booking> bookings;
+    private ArrayList<ParkingSpot> parkingSpots = new ArrayList<>();
+    private ArrayList<Booking> bookings = new ArrayList<>();
 
 
     public ArrayList<ParkingSpot> getParkingSpots() {
@@ -23,14 +21,18 @@ public class BookingService {
         this.parkingSpots = parkingSpots;
     }
 
-    public String bookBike(Bike bike, User user) {
-        bookings.add(new Booking(bike, user));
+    public String bookBike(Bike bike, User user, Date startDate, Date endDate) {
+        bookings.add(new Booking(bike, user, startDate, endDate));
         Random random = new Random();
         String randomNumbers = "";
         for (int i = 0; i < 10; i++) {
             randomNumbers = randomNumbers + random.nextInt(10);
         }
         return randomNumbers;
+    }
+
+    public void addBooking(Booking booking) {
+        bookings.add(booking);
     }
 
     public ArrayList<Booking> getBookings() {

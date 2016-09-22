@@ -50,4 +50,8 @@ public class Bike {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String toString() {
+        return "Bike id: " + getId() + "\nName: " + getName() + "\nBattery: " + getBattery() + "\nAvailable: " + isAvailable();
+    }
 }
