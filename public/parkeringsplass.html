@@ -33,22 +33,17 @@
     </script>
 </head>
 <body>
-<h1>Trondheim Bike Rental Services</h1>
-
+<h1>this is it</h1>
 <br>
-<h2>Select pickup point!</h2>
-<select id="mySelect"></select>
-<button id="myButton">see available bikes</button>
+<h1>Select a bike</h1>
 
 <table id="myTable" class="display">
     <thead>
-    <tr><th>name</th><th>battery</th><th>id</th><th>available</th><th id="book">book</th>
+    <tr><th>Name</th><th>Battery</th><th>Bike ID</th><th>Available</th><th id="code">Code</th><th id="submitCode">Submit code</th>
     </tr>
+    <!--<tr><th>myId</th><th>myBattery</th><th>myName</th><th>available</th></tr>-->
     </thead>
 </table>
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -58,18 +53,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 id="modalHeader" class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body">
-                <div id="bookingForm">
-                    <form name="myForm1" id="myForm">
-                        <input type="text" name="user" value="name">
-                        <h1 id="submitButton">Submit</h1>
-                    </form>
-                </div>
-                <div>
-                    <h4 id="codeText">u</h4>
-                </div>
+                <form name="myForm1" id="myForm">
+                    <input type="text" name="user" value="name">
+                    <input name="date1" type="date" value="">
+                    <input name="date2" type="date" value="">
+                    <input type="submit">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -81,13 +73,9 @@
 </div>
 
 
-<h1>My bikes</h1>
-<table id="myBikeTable" class="display">
-    <thead>
-    <tr><th>Name</th><th>Battery</th><th>Bike id</th><th>Code</th><th id="submitCode">Submit code</th>
-    </tr>
-    </thead>
-</table>
+<div>
+    <h1 id="myH1">myH1 CLick</h1>
+</div>
 
 
 </body>

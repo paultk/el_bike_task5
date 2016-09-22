@@ -2,6 +2,8 @@ $(document).ready( function () {
 
     var id;
 
+    $(".code")
+
 
     /*$('#myForm').submit(function() {
      // get all the inputs into an array.
@@ -30,7 +32,7 @@ $(document).ready( function () {
         })
     });
 
-    $('#myForm').submit(function() {
+    $('#submitButton').click(function() {
         console.log("ping");
         // get all the inputs into an array.
         var $inputs = $('#myForm :input');
@@ -48,8 +50,14 @@ $(document).ready( function () {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/bookTry" + '/' + id + '/' + values['date1'] + '/' + values['date2'],
-            data: JSON.stringify(user2)
+            url: "/bookTry" + '/' + id,
+            data: JSON.stringify(user2),
+            success: function(code) {
+                console.log("code: " + code);
+                $("#bookingForm").hide();
+                $("#codeText").html(code);
+                $("#modalHeader").html("Your code");
+            }
 
         });
 
@@ -67,12 +75,6 @@ $(document).ready( function () {
         id = data1["id"];
     } );
 
-    // var table = $('#myTable').DataTable();
-    /*
-     $('#myTable tbody').on( 'click', 'tr', function () {
-     console.log("ping");
-     console.log( table.row( this ).data() );
-     } );*/
 
 
 
@@ -98,6 +100,33 @@ $(document).ready( function () {
      var id = $(this).attr('value');*/
 
     function testJson() {
+        $.ajax({
+            url: "/get-bikes2",
+            type: "GET",
+            dataType: "json",
+            success: function (json) {
+                console.log(json["availableBikes"]);
+                table = $("#myTable").DataTable({
+                        data: json["availableBikes"],
+                        columns: [
+                            {data: 'name'},
+                            {data: 'battery'},
+                            {data: 'id'},
+                            {data: 'available'},
+                            {
+                                data: function () {
+                                    return "<button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Book</button>";
+                                }
+                            }
+                            // {data: 'available'},
+                        ]
+                    }
+                );
+            }
+        });
+    }
+
+    function myBikeTable() {
         $.ajax({
             url: "/get-bikes2",
             type: "GET",
@@ -224,7 +253,6 @@ $(document).ready( function () {
             }
 
         )
-
     });
 
 

@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -88,38 +90,36 @@ public class MyRestController {
         return bookingService.getParkingSpots().get(0);
     }
 
-    @RequestMapping("/booking")
-    public String book(@RequestParam( value = "date", required = false)String date) {
-        startUp();
-        Bike bike = bookingService.getParkingSpots().get(0).getBikes().get(0);
-        return "Bike:\t" + bike.getName() + "\nbooked for:\t" + date;
-    }
-
-//    using both path variables as well as RequestBody
-    @RequestMapping("/bookTry/{id}/{date1}/{date2}")
-    public void bookBike(@RequestBody User user, @PathVariable String id, @PathVariable String date1, @PathVariable String date2) throws ParseException
+    @RequestMapping("/bookTry/{id}")
+    public String bookBike(@RequestBody User user, @PathVariable String id) throws ParseException
     {
         startUp();
 
-        System.out.println("Name:\t" + user.getName());
-        System.out.println("date1:\t" + date1);
-        System.out.println("date2:\t" + date2);
-        System.out.println("id:\t" + id);
+        LocalDateTime now = LocalDateTime.now();
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String code = "";
+        Random myRandom = new Random();
+        for (int i = 0; i < 4; i++) {
+            code += myRandom.nextInt(9);
+        }
+
+        System.out.println("Name:\t" + user.getName());
+        System.out.println("Time of booking\t:" + now.toString());
+        System.out.println("id:\t" + id);
 
         for (ParkingSpot parkingspot :
                 bookingService.getParkingSpots()) {
             for (Bike bike :
                     parkingspot.getBikes()) {
                 if(bike.getId() == Integer.parseInt(id)) {
-                    bookingService.getBookings().add(new Booking(bike, user, df.parse(date1), df.parse(date2)));
+                    bookingService.getBookings().add(new Booking(bike, user, now, code));
                     bike.setAvailable(false);
                     bookingService.getParkingSpots().get(0).getBikes().remove(bike);
-                    return;
+                    return code;
                 }
             }
         }
+        return null;
     }
 
 }

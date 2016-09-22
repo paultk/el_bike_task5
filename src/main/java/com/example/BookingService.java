@@ -1,5 +1,6 @@
 package com.example;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -12,7 +13,6 @@ public class BookingService {
     private ArrayList<ParkingSpot> parkingSpots = new ArrayList<>();
     private ArrayList<Booking> bookings = new ArrayList<>();
 
-
     public ArrayList<ParkingSpot> getParkingSpots() {
         return parkingSpots;
     }
@@ -21,8 +21,8 @@ public class BookingService {
         this.parkingSpots = parkingSpots;
     }
 
-    public String bookBike(Bike bike, User user, Date startDate, Date endDate) {
-        bookings.add(new Booking(bike, user, startDate, endDate));
+    public String bookBike(Bike bike, User user, LocalDateTime timeOfBooking, String code) {
+        bookings.add(new Booking(bike, user, timeOfBooking, code));
         Random random = new Random();
         String randomNumbers = "";
         for (int i = 0; i < 10; i++) {

@@ -1,5 +1,8 @@
 package com.example;
 
+import org.apache.tomcat.jni.Local;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -8,15 +11,15 @@ import java.util.Date;
 public class Booking {
     private Bike bike;
     private User user;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime timeOfBooking;
+    private String bookingCode;
 
 
-    public Booking(Bike bike, User user, Date startDate, Date endDate) {
+    public Booking(Bike bike, User user, LocalDateTime timeOfBooking, String bookingCode) {
         this.bike = bike;
         this.user = user;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.timeOfBooking = timeOfBooking;
+        this.bookingCode = bookingCode;
     }
 
     public Bike getBike() {
@@ -35,19 +38,19 @@ public class Booking {
         this.user = user;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public LocalDateTime getTimeOfBooking() {
+        return timeOfBooking;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setTimeOfBooking(LocalDateTime timeOfBooking) {
+        this.timeOfBooking = timeOfBooking;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getBookingCode() {
+        return bookingCode;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setBookingCode(String bookingCode) {
+        this.bookingCode = bookingCode;
     }
 }
