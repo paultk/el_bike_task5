@@ -47,9 +47,6 @@
     </thead>
 </table>
 
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -65,7 +62,6 @@
                 <div id="bookingForm">
                     <form name="myForm1" id="myForm">
                         <input type="text" name="user" value="name">
-                        <h2 id="submitButton">Submit</h2>
                     </form>
                 </div>
                 <div>
@@ -74,26 +70,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button  type="button" class="btn btn-default" data-dismiss="modal" >Book</button>
+                <button id="bookModalButton" type="button" class="btn btn-default" >Book</button>
             </div>
         </div>
 
     </div>
 </div>
 
-
-<h1>My bikes</h1>
-<table id="myBikeTable" class="display">
-    <thead>
-    <tr><th>Name</th><th>Battery</th><th>Bike id</th><th>In use</th><th id="codeInputField">Code</th><th id="submitCodeButton">Submit code</th>
-    </tr>
-    </thead>
-</table>
-
 <div id="reserve">
-    <input name="id" id="idForBike" type="text" value="Id for bike">
+    <h2 id="bikeName"></h2>
     <input name="code" id="codeInput2" type="text" value="Code for bike">
-    <button id="codeForSubmit2">Check out bike</button>
+    <button id="codeForSubmit2" type="button" class="btn btn-default" >Book</button>
 </div>
 
 </body>

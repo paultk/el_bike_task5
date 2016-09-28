@@ -2,24 +2,9 @@ $(document).ready( function () {
 
     var id;
     var actualCode;
+    var name;
 
-    $(".code")
-
-
-    /*$('#myForm').submit(function() {
-     // get all the inputs into an array.
-     var $inputs = $('#myForm :input');
-
-     // not sure if you wanted this, but I thought I'd add it.
-     // get an associative array of just the values.
-     var values = {};
-     $inputs.each(function() {
-     values[this.name] = $(this).val();
-     });
-
-     });*/
-
-    $('#myH1').click(function() {
+    $('#myH1').click(function () {
 
         user2 = {};
         user2['name'] = "tryName";
@@ -34,26 +19,14 @@ $(document).ready( function () {
     });
 
 
-
-
-
-
     var table = null;
 
 
-    $('#myTable').on( 'click', 'button', function () {
-        var data1 = table.row( $(this).parents('tr') ).data();
+    $('#myTable').on('click', 'button', function () {
+        var data1 = table.row($(this).parents('tr')).data();
         id = data1["id"];
-    } );
-
-    $('#myBikeTable').on( 'click', 'button', function () {
-        var data1 = table.row( $(this).parents('tr') ).data();
-        id = data1["id"];
-    } );
-
-
-
-
+        $("#bikeName").html(data1["name"]);
+    });
 
 
     var x;
@@ -63,7 +36,7 @@ $(document).ready( function () {
         console.log("d");
     });
 
-    $("#submitForCode").click(function() {
+    $("#submitForCode").click(function () {
         let inputCode = $("#codeInputField").value();
         console.log("my>Ping");
         console.log(inputCode);
@@ -72,79 +45,14 @@ $(document).ready( function () {
             contentType: "application/json",
             url: "/takeBike" + '/' + id,
             data: inputCode,
-            success: function() {
+            success: function () {
                 $(this).replaceWith("<button type=\"button\" id=\"returnBike\" class=\"btn btn-info btn-lg\">Return bike</button>");
             }
         })
-
     });
 
-    $('#submitButton').click(function() {
-        console.log("ping");
-        // get all the inputs into an array.
-        var $inputs = $('#myForm :input');
-
-        // not sure if you wanted this, but I thought I'd add it.
-        // get an associative array of just the values.
-        var values = {};
-        $inputs.each(function() {
-            values[this.name] = $(this).val();
-        });
-        user2 = {};
-        user2['name'] = values["user"];
-        // user2['bike'] = {'name': ''};
-
-        function bookBike() {
-            return $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/bookTry" + '/' + id,
-                data: JSON.stringify(user2),
-                success: function(code) {
-                    console.log("code: " + code);
-                    $("#bookingForm").hide();
-                    $("#codeText").html(code);
-                    $("#modalHeader").html("Your code");
-                    actualCode = code;
-                }
-            });
-        }
-
-
-        function getMyBikes() {
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/get-my-bikes" + '/' + user2['name'],
-                dataType: "json",
-                data: JSON.stringify(user2),
-                success: function (json) {
-                    console.log(json["bikeTest"]);
-                    table = $("#myBikeTable").DataTable({
-                        data: json["bikeTest"],
-                        columns: [
-                            {data: 'name'},
-                            {data: 'battery'},
-                            {data: 'id'},
-                            {data: 'inUse'},
-                            {
-                                data: function() {
-                                    return "<input type=\"text\">";
-                                }
-                            },
-                            {
-                                data: function() {
-                                    return "<button type=\"button\" class=\"btn btn-info btn-lg\" id=\"submitForCode\">Take bike</button>";
-                                }
-                            }
-                        ]
-                    });
-                }
-            });
-        }
-
-        $.when(bookBike()).then(getMyBikes);
-
+    $("#codeInput2").click(function () {
+       $(this).val('');
     });
 
     function testJson() {
@@ -175,13 +83,6 @@ $(document).ready( function () {
     }
 
 
-
-
-
-
-
-
-
     function getLocations() {
         $.ajax({
             url: "/get-locations",
@@ -207,54 +108,17 @@ $(document).ready( function () {
                         data: myObject,
                         columns: [
 
-                            { data: 'name' },
-                            { data: 'position' },
-                            { data: 'salary' },
-                            { data: 'office' }
+                            {data: 'name'},
+                            {data: 'position'},
+                            {data: 'salary'},
+                            {data: 'office'}
                         ]
                     }
-
-                )/*
-                 $.each(json, function (i, value) {
-                 for (let i = 0; i < value.length; i++){
-                 console.log(value[0]);
-                 }
-                 // console.log(value[1]);
-
-                 // $("#mySelect").append($('<option>').text(value).attr('value', value));
-                 // console.log(value);
-                 });
-                 return json;*/
-
+                );
             }
 
         })
     }
-
-
-    /*function getData() {
-     $.ajax({
-     type: "POST",
-     contentType: "application/json",
-     url: "http://localhost:8080/get-bikes",
-     data: JSON.stringify(message),
-     dataType: 'json',
-     timeout: 100000,
-     success: function (data) {
-     console.log("SUCCESS: ", data);
-     // displayData(data);
-     },
-     error: function (e) {
-     //                        console.log("ERROR: ", e);
-     display(e);
-     },
-     done: function (e) {
-     console.log("DONE");
-     //                        enableSearchButton(true);
-     }
-     });
-     }*/
-
 
 
     $("booked").click(function () {
@@ -262,7 +126,8 @@ $(document).ready( function () {
         console.log(42);
     });
 
-    $("#myButton").click( function () {
+
+    $("#myButton").click(function () {
         // let selected = $(this).val();
         $("#myTable").dataTable({
                 ajax: {
@@ -277,92 +142,49 @@ $(document).ready( function () {
                     {bikes: 'available'}
                 ]
             }
-
         )
     });
 
     $("#codeForSubmit2").click(function () {
-       let code = $("#codeInput2").val();
-       let id = $("#idForBike").val();
+        let code = $("#codeInput2").val();
         $.ajax({
             type: "POST",
             url: "/takeBike" + '/' + id,
             data: JSON.stringify(code),
         });
+    });
+
+    $("#bookModalButton").click(function () {
+        console.log("ping");
+        // get all the inputs into an array.
+        var $inputs = $('#myForm :input');
+
+        // not sure if you wanted this, but I thought I'd add it.
+        // get an associative array of just the values.
+        var values = {};
+        $inputs.each(function () {
+            values[this.name] = $(this).val();
         });
+        user2 = {};
+        user2['name'] = values["user"];
+        // user2['bike'] = {'name': ''};
 
-
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/bookTry" + '/' + id,
+            data: JSON.stringify(user2),
+            success: function (code) {
+                console.log("code: " + code);
+                $("#bookingForm").hide();
+                $("#codeText").html(code);
+                $("#modalHeader").html("Your code");
+                actualCode = code;
+            }
+        });
+        $("#bookModalButton").hide();
+    });
 
     testJson();
-    console.log("x:");
-    console.log(x);
-    // getBikez();
-    /*
-     getLocations();
-     var bikes1 = getBikez();
-     // console.log(bikes1);
-     for (let i = 0; i < myBikes.length; i++){
-     console.log("here");
-     console.log(myBikes[i]);
-     }
-     // $("#mySelect")
-     // getData();
-     // getBikez();*/
 
 });
-console.log("g");
-
-/*
- $('#myTable').DataTable(
- {
- ajax: {
- url: 'rest/kunder2',
- dataSrc: 'data'
- },
- columns: [
- { data: 'id' },
- { data: 'navn' }
- ]
- });
-
-
-
-
-
- $.ajax({
- url:'suggest.html',
- type:'POST',
- data: 'q=' + str,
- dataType: 'json',
- success: function( json ) {
- $.each(json, function(i, value) {
- $('#myselect').append($('<option>').text(value).attr('value', value));
- });
- }
- });
-
-
- * function getData() {
- $.ajax({
- type: "POST",
- contentType: "application/json",
- url: "http://localhost:8080/rest/second",
- data: JSON.stringify(message),
- dataType: 'json',
- timeout: 100000,
- success: function (data) {
- console.log("SUCCESS: ", data);
- displayData(data);
- },
- error: function (e) {
- //                        console.log("ERROR: ", e);
- display(e);
- },
- done: function (e) {
- console.log("DONE");
- //                        enableSearchButton(true);
- }
- });
-
-
- }*/
