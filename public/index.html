@@ -21,23 +21,22 @@
     <script src="static/js/main.js"></script>
 
     <style>
-        #book {
-            size: 30px;
+        #myTable {
+            display: none;
         }
-        .book2 {
-            color: aqua;
-        }
-
     </style>
-    <script>
-    </script>
 </head>
 <body>
 <h1>Trondheim Bike Rental Services</h1>
 
 <br>
 <h2>Select pickup point!</h2>
-<select id="mySelect"></select>
+<select id="mySelect2">
+    <option>Gløshaugen</option>
+    <option>Dragvoll</option>
+    <option>Kalvskinnet</option>
+    <option>Torget</option>
+</select>
 <button id="myButton">see available bikes</button>
 
 <table id="myTable" class="display">
@@ -56,7 +55,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 id="modalHeader" class="modal-title">Modal Header</h4>
+                <h4 id="modalHeader" class="modal-title">New booking</h4>
             </div>
             <div class="modal-body">
                 <div id="bookingForm">
@@ -79,7 +78,7 @@
 
 <div id="reserve">
     <h2 id="bikeName"></h2>
-    <input name="code" id="codeInput2" type="text" value="Code for bike">
+    <input name="code" id="codeInput2" type="text" placeholder="Code">
     <button id="codeForSubmit2" type="button" class="btn btn-default" >Book</button>
 </div>
 

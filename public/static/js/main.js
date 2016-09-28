@@ -33,12 +33,10 @@ $(document).ready( function () {
 
     $("book2").click(function () {
         x = $(this).val();
-        console.log("d");
     });
 
     $("#submitForCode").click(function () {
         let inputCode = $("#codeInputField").value();
-        console.log("my>Ping");
         console.log(inputCode);
         $.ajax({
             type: "POST",
@@ -51,9 +49,6 @@ $(document).ready( function () {
         })
     });
 
-    $("#codeInput2").click(function () {
-       $(this).val('');
-    });
 
     function testJson() {
         $.ajax({
@@ -61,7 +56,6 @@ $(document).ready( function () {
             type: "GET",
             dataType: "json",
             success: function (json) {
-                console.log(json["availableBikes"]);
                 table = $("#myTable").DataTable({
                         data: json["availableBikes"],
                         columns: [
@@ -103,7 +97,6 @@ $(document).ready( function () {
             type: "GET",
             dataType: "json",
             success: function (json1) {
-                console.log("success");
                 $("#myTable").dataTable({
                         data: myObject,
                         columns: [
@@ -127,7 +120,8 @@ $(document).ready( function () {
     });
 
 
-    $("#myButton").click(function () {
+   /* Previous function for loading locations
+   $("#myButton").click(function () {
         // let selected = $(this).val();
         $("#myTable").dataTable({
                 ajax: {
@@ -143,7 +137,7 @@ $(document).ready( function () {
                 ]
             }
         )
-    });
+    });*/
 
     $("#codeForSubmit2").click(function () {
         let code = $("#codeInput2").val();
@@ -184,7 +178,10 @@ $(document).ready( function () {
         });
         $("#bookModalButton").hide();
     });
+    $("#myButton").click(function () {
+        $("#myTable").show();
+        testJson();
+    });
 
-    testJson();
 
 });
