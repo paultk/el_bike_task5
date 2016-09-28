@@ -8,6 +8,7 @@ public class Bike {
     private int battery;
     private String name;
     private boolean available = true;
+    private boolean inUse = false;
 
 
     public Bike(int id, int battery, String name) {
@@ -25,6 +26,14 @@ public class Bike {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 
     public int getId() {

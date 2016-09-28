@@ -49,6 +49,7 @@
 
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -64,11 +65,11 @@
                 <div id="bookingForm">
                     <form name="myForm1" id="myForm">
                         <input type="text" name="user" value="name">
-                        <h1 id="submitButton">Submit</h1>
+                        <h2 id="submitButton">Submit</h2>
                     </form>
                 </div>
                 <div>
-                    <h4 id="codeText">u</h4>
+                    <h4 id="codeText"></h4>
                 </div>
             </div>
             <div class="modal-footer">
@@ -84,7 +85,7 @@
 <h1>My bikes</h1>
 <table id="myBikeTable" class="display">
     <thead>
-    <tr><th>Name</th><th>Battery</th><th>Bike id</th><th>Code</th><th id="submitCode">Submit code</th>
+    <tr><th>Name</th><th>Battery</th><th>Bike id</th><th>In use</th><th id="codeInputField">Code</th><th id="submitCodeButton">Submit code</th>
     </tr>
     </thead>
 </table>

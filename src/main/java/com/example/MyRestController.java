@@ -3,6 +3,7 @@ package com.example;
 import com.fasterxml.jackson.annotation.JsonView;
 import jdk.nashorn.internal.runtime.JSONFunctions;
 import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
@@ -84,14 +85,42 @@ public class MyRestController {
         return null;
     }
 
+    @RequestMapping("/get-my-bikes/{name}")
+    public @ResponseBody Booking getMyBikes(@PathVariable String name) {
+        startUp();
+
+        for (Booking booking :
+                bookingService.getBookings()) {
+            if (booking.getUser().getName().equals(name)) {
+                return booking;
+            }
+        }
+        return null;
+    }
+
     @RequestMapping("/get-bikes2")
     public @ResponseBody ParkingSpot getBikes2() {
         startUp();
         return bookingService.getParkingSpots().get(0);
     }
 
+    @RequestMapping("/takeBike/{id}")
+    public boolean takeBike(@RequestBody String code, @PathVariable String id) {
+
+        for (Booking booking : bookingService.getBookings()) {
+            if (booking.getBike().getId() == Integer.parseInt(id) && code.equals(booking.getBookingCode())) {
+                booking.getBike().setInUse(true);
+                Bike newBike = booking.getBike();
+                booking.setBike(newBike);
+
+                return booking.getBike().isInUse();
+            }
+        }
+        return false;
+    }
+
     @RequestMapping("/bookTry/{id}")
-    public String bookBike(@RequestBody User user, @PathVariable String id) throws ParseException
+    public String bookBike(@RequestBody User user, @PathVariable String id)
     {
         startUp();
 
@@ -103,9 +132,9 @@ public class MyRestController {
             code += myRandom.nextInt(9);
         }
 
-        System.out.println("Name:\t" + user.getName());
-        System.out.println("Time of booking\t:" + now.toString());
-        System.out.println("id:\t" + id);
+        /*System.out.println("Name:\t" + user.getName());
+        System.out.println("Time of booking:\t" + now.toString());
+        System.out.println("id:\t" + id);*/
 
         for (ParkingSpot parkingspot :
                 bookingService.getParkingSpots()) {

@@ -3,12 +3,14 @@ package com.example;
 import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by paul on 15.09.16.
  */
 public class Booking {
+    private ArrayList<Bike> bikeTest = new ArrayList<>();
     private Bike bike;
     private User user;
     private LocalDateTime timeOfBooking;
@@ -20,6 +22,7 @@ public class Booking {
         this.user = user;
         this.timeOfBooking = timeOfBooking;
         this.bookingCode = bookingCode;
+        bikeTest.add(bike);
     }
 
     public Bike getBike() {
@@ -27,7 +30,9 @@ public class Booking {
     }
 
     public void setBike(Bike bike) {
+        bikeTest.remove(bike);
         this.bike = bike;
+        bikeTest.add(bike);
     }
 
     public User getUser() {
@@ -52,5 +57,13 @@ public class Booking {
 
     public void setBookingCode(String bookingCode) {
         this.bookingCode = bookingCode;
+    }
+
+    public ArrayList<Bike> getBikeTest() {
+        return bikeTest;
+    }
+
+    public void setBikeTest(ArrayList<Bike> bikeTest) {
+        this.bikeTest = bikeTest;
     }
 }
