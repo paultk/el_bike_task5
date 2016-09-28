@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -45,6 +46,27 @@ public class MyRestController {
                 bookingService.getParkingSpots().get(i).setBikes(bikes);
             }
             started = true;
+
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (true) {
+                            Thread.sleep(10000);
+                            bookingService.getBookings().stream().filter(booking -> !booking.getBike().isInUse()).forEach(booking -> {
+                                long minutes = ChronoUnit.MINUTES.between(booking.getTimeOfBooking(), LocalDateTime.now());
+                                if (minutes > 30) {
+                                    booking.getBike().setAvailable(true);
+                                    bookingService.getParkingSpots().get(0).getBikes().add(booking.getBike());
+
+                                }
+                            });
+                            System.out.println("ping");
+                        }
+                    }catch (Exception e){e.printStackTrace();}
+                }
+            };
+            runnable.run();
         }
     }
 
@@ -107,6 +129,7 @@ public class MyRestController {
     @RequestMapping("/takeBike/{id}")
     public boolean takeBike(@RequestBody String code, @PathVariable String id) {
 
+        System.out.println("ping2");
         for (Booking booking : bookingService.getBookings()) {
             if (booking.getBike().getId() == Integer.parseInt(id) && code.equals(booking.getBookingCode())) {
                 booking.getBike().setInUse(true);

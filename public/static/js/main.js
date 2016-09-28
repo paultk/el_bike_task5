@@ -63,9 +63,10 @@ $(document).ready( function () {
         console.log("d");
     });
 
-    $("#submitCodeButton").click(function() {
-        var inputCode = $("#codeInputField :input");
-
+    $("#submitForCode").click(function() {
+        let inputCode = $("#codeInputField").value();
+        console.log("my>Ping");
+        console.log(inputCode);
         $.ajax({
             type: "POST",
             contentType: "application/json",
@@ -133,7 +134,7 @@ $(document).ready( function () {
                             },
                             {
                                 data: function() {
-                                    return "<button type=\"button\" class=\"btn btn-info btn-lg\" id=\"submitCodeButton\">Take bike</button>";
+                                    return "<button type=\"button\" class=\"btn btn-info btn-lg\" id=\"submitForCode\">Take bike</button>";
                                 }
                             }
                         ]
@@ -279,6 +280,16 @@ $(document).ready( function () {
 
         )
     });
+
+    $("#codeForSubmit2").click(function () {
+       let code = $("#codeInput2").val();
+       let id = $("#idForBike").val();
+        $.ajax({
+            type: "POST",
+            url: "/takeBike" + '/' + id,
+            data: JSON.stringify(code),
+        });
+        });
 
 
 
