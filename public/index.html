@@ -19,33 +19,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script src="static/js/main.js"></script>
-
-    <style>
-        #myTable {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
 <body>
-<h1>Trondheim Bike Rental Services</h1>
+<div class="wrapper">
+    <h1>Trondheim Bike Rental Services</h1>
+    <hr>
+    <h2>Select pickup point</h2>
+    <select id="mySelect2">
+        <option>Gløshaugen</option>
+        <option>Dragvoll</option>
+        <option>Kalvskinnet</option>
+        <option>Torget</option>
+    </select>
+    <button id="myButton">see available bikes</button>
 
-<br>
-<h2>Select pickup point!</h2>
-<select id="mySelect2">
-    <option>Gløshaugen</option>
-    <option>Dragvoll</option>
-    <option>Kalvskinnet</option>
-    <option>Torget</option>
-</select>
-<button id="myButton">see available bikes</button>
+    <div id="reserve">
+        <h2 id="bikeName"></h2>
+        <input name="code" id="codeInput2" type="text" placeholder="Code">
+        <button id="codeForSubmit2" type="button" class="btn btn-default" >Enter</button>
+    </div>
 
-<table id="myTable" class="display">
-    <thead>
-    <tr><th>name</th><th>battery</th><th>id</th><th>available</th><th id="book">book</th>
-    </tr>
-    </thead>
-</table>
-
+    <table id="myTable" class="display">
+        <thead>
+        <tr><th>name</th><th>battery</th><th>id</th><th>available</th><th id="book">book</th>
+        </tr>
+        </thead>
+    </table>
+</div>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -60,7 +61,7 @@
             <div class="modal-body">
                 <div id="bookingForm">
                     <form name="myForm1" id="myForm">
-                        <input type="text" name="user" value="name">
+                        <input type="text" name="user" placeholder="Name">
                     </form>
                 </div>
                 <div>
@@ -68,18 +69,12 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button id="bookModalButton" type="button" class="btn btn-default" >Book</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
 
     </div>
-</div>
-
-<div id="reserve">
-    <h2 id="bikeName"></h2>
-    <input name="code" id="codeInput2" type="text" placeholder="Code">
-    <button id="codeForSubmit2" type="button" class="btn btn-default" >Book</button>
 </div>
 
 </body>

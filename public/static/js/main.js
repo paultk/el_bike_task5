@@ -25,7 +25,7 @@ $(document).ready( function () {
     $('#myTable').on('click', 'button', function () {
         var data1 = table.row($(this).parents('tr')).data();
         id = data1["id"];
-        $("#bikeName").html(data1["name"]);
+        $("#bikeName").html("Enter code to pick up " + data1["name"]);
     });
 
 
