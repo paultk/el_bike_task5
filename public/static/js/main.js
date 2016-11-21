@@ -1,81 +1,33 @@
-$(document).ready( function () {
+/**
+ * Created by paul on 18.11.16.
+ */
 
-    var id;
-    var actualCode;
-    var name;
+$(document).ready(function () {
 
-    $('#myH1').click(function () {
-
-        user2 = {};
-        user2['name'] = "tryName";
-        // user2['bike'] = {'name': ''};
-
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "/bookTry",
-            data: JSON.stringify(user2),
-        })
-    });
-
-
-    var table = null;
-
-
-    $('#myTable').on('click', 'button', function () {
-        var data1 = table.row($(this).parents('tr')).data();
-        id = data1["id"];
-        $("#bikeName").html("Enter code to pick up " + data1["name"]);
-    });
-
-
-    var x;
-
-    $("book2").click(function () {
-        x = $(this).val();
-    });
-
-    $("#submitForCode").click(function () {
-        let inputCode = $("#codeInputField").value();
-        console.log(inputCode);
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "/takeBike" + '/' + id,
-            data: inputCode,
-            success: function () {
-                $(this).replaceWith("<button type=\"button\" id=\"returnBike\" class=\"btn btn-info btn-lg\">Return bike</button>");
-            }
-        })
-    });
-
-
-    function testJson() {
+    function getBikes() {
         $.ajax({
             url: "/get-bikes2",
             type: "GET",
             dataType: "json",
             success: function (json) {
-                table = $("#myTable").DataTable({
-                        data: json["availableBikes"],
-                        columns: [
-                            {data: 'name'},
-                            {data: 'battery'},
-                            {data: 'id'},
-                            {data: 'available'},
-                            {
-                                data: function () {
-                                    return "<button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Book</button>";
-                                }
-                            }
-                            // {data: 'available'},
-                        ]
-                    }
-                );
+                json["bikes"].forEach(function (val) {
+
+                    let returnString = `<tr><td class="table-row" id='${val.name}' >${val.name}</td></tr>`;
+
+                    console.log(val.name);
+
+                    $("#bikesRows").append(returnString);
+            });
+
+
             }
         });
     }
-
+/*
+    function append(element, string) {
+        $(element).after(string);
+        /!**!/
+    }*/
 
     function getLocations() {
         $.ajax({
@@ -83,105 +35,50 @@ $(document).ready( function () {
             type: "GET",
             dataType: "json",
             success: function (json) {
+
+                //"<tr><td>" + string + "</td></tr>"
                 $.each(json, function (i, value) {
-                    $("#mySelect").append($('<option>').text(value).attr('value', value));
-                    // console.log(value);
-                })
+
+                        let returnString = "<tr><td class='table-row'>" + value + "</td></tr>";
+                        $("#pickUpTable").append(returnString);
+                    })
             }
         })
     }
 
-    function getBikez() {
-        $.ajax({
-            url: "/get-bikes2",
-            type: "GET",
-            dataType: "json",
-            success: function (json1) {
-                $("#myTable").dataTable({
-                        data: myObject,
-                        columns: [
-
-                            {data: 'name'},
-                            {data: 'position'},
-                            {data: 'salary'},
-                            {data: 'office'}
-                        ]
-                    }
-                );
-            }
-
-        })
+    function giveCode(code, name, email) {
+        returnString = "<h2>Code:   " + code +"</h2>"
+        +"<h2>Reserved for" + name +"</h2>"
+        +"<h2>And sent to email:  " + email +"</h2>";
+        $("#givenCodeDiv").append(returnString)
     }
 
-
-    $("booked").click(function () {
-        let x = $(this);
-        console.log(42);
+    $("#confirmButton").click(function () {
+       let name = $("#name").val();
+       let email = $("#email").val();
+        giveCode(2121, name, email);
+        console.log(name);
+        console.log(email);
     });
 
+    function init() {
+        $(".bikes").hide();
+        $(".nameBooking").hide();
+    }
 
-   /* Previous function for loading locations
-   $("#myButton").click(function () {
-        // let selected = $(this).val();
-        $("#myTable").dataTable({
-                ajax: {
-                    url: '/get-bikes2', //+ selected,
-                    data: myBikes
-                },
-                columns: [
-
-                    {bikes: 'id'},
-                    {bikes: 'battery'},
-                    {bikes: 'name'},
-                    {bikes: 'available'}
-                ]
-            }
-        )
-    });*/
-
-    $("#codeForSubmit2").click(function () {
-        let code = $("#codeInput2").val();
-        $.ajax({
-            type: "POST",
-            url: "/takeBike" + '/' + id,
-            data: JSON.stringify(code),
-        });
+    $(".pickup").click(function () {
+        $(".bikes").show();
+        console.log("pint");
     });
 
-    $("#bookModalButton").click(function () {
-        console.log("ping");
-        // get all the inputs into an array.
-        var $inputs = $('#myForm :input');
-
-        // not sure if you wanted this, but I thought I'd add it.
-        // get an associative array of just the values.
-        var values = {};
-        $inputs.each(function () {
-            values[this.name] = $(this).val();
-        });
-        user2 = {};
-        user2['name'] = values["user"];
-        // user2['bike'] = {'name': ''};
-
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "/bookTry" + '/' + id,
-            data: JSON.stringify(user2),
-            success: function (code) {
-                console.log("code: " + code);
-                $("#bookingForm").hide();
-                $("#codeText").html(code);
-                $("#modalHeader").html("Your code");
-                actualCode = code;
-            }
-        });
-        $("#bookModalButton").hide();
+    $(".bikes").click(function () {
+        $(".nameBooking").show();
+        console.log("pint");
     });
-    $("#myButton").click(function () {
-        $("#myTable").show();
-        testJson();
-    });
+
+    init();
+    getBikes();
+    getLocations()
 
 
 });

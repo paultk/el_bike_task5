@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/El_Bike.iml" filepath="$PROJECT_DIR$/El_Bike.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/el_bike_task5.iml" filepath="$PROJECT_DIR$/.idea/modules/el_bike_task5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/el_bike_task5_main.iml" filepath="$PROJECT_DIR$/.idea/modules/el_bike_task5_main.iml" group="el_bike_task5" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/el_bike_task5_test.iml" filepath="$PROJECT_DIR$/.idea/modules/el_bike_task5_test.iml" group="el_bike_task5" />
     </modules>
   </component>
 </project>

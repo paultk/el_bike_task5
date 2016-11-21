@@ -19,31 +19,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script src="static/js/oldMain.js"></script>
-
-    <style>
-        #book {
-            size: 30px;
-        }
-        .book2 {
-            color: aqua;
-        }
-
-    </style>
-    <script>
-    </script>
+    <link rel="stylesheet" type="text/css" href="static/css/oldStyle.css">
 </head>
 <body>
-<h1>this is it</h1>
-<br>
-<h1>Select a bike</h1>
+<div class="wrapper">
+    <h1>Trondheim Bike Rental Services</h1>
+    <hr>
+    <h2>Select pickup point</h2>
+    <select id="mySelect2">
+        <option>Gløshaugen</option>
+        <option>Dragvoll</option>
+        <option>Kalvskinnet</option>
+        <option>Torget</option>
+    </select>
+    <button id="myButton">see available bikes</button>
 
-<table id="myTable" class="display">
-    <thead>
-    <tr><th>Name</th><th>Battery</th><th>Bike ID</th><th>Available</th><th id="code">Code</th><th id="submitCode">Submit code</th>
-    </tr>
-    <!--<tr><th>myId</th><th>myBattery</th><th>myName</th><th>available</th></tr>-->
-    </thead>
-</table>
+    <div id="reserve">
+        <h2 id="bikeName"></h2>
+        <input name="code" id="codeInput2" type="text" placeholder="Code">
+        <button id="codeForSubmit2" type="button" class="btn btn-default" >Enter</button>
+    </div>
+
+    <table id="myTable" class="display">
+        <thead>
+        <tr><th>name</th><th>battery</th><th>id</th><th>available</th><th id="book">book</th>
+        </tr>
+        </thead>
+    </table>
+</div>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -53,30 +56,26 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 id="modalHeader" class="modal-title">New booking</h4>
             </div>
             <div class="modal-body">
-                <form name="myForm1" id="myForm">
-                    <input type="text" name="user" value="name">
-                    <input name="date1" type="date" value="">
-                    <input name="date2" type="date" value="">
-                    <input type="submit">
-                </form>
+                <div id="bookingForm">
+                    <form name="myForm1" id="myForm">
+                        <input type="text" name="user" placeholder="Name">
+                    </form>
+                </div>
+                <div>
+                    <h4 id="codeText"></h4>
+                </div>
             </div>
             <div class="modal-footer">
+                <button id="bookModalButton" type="button" class="btn btn-default" >Book</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button  type="button" class="btn btn-default" data-dismiss="modal" >Book</button>
             </div>
         </div>
 
     </div>
 </div>
-
-
-<div>
-    <h1 id="myH1">myH1 CLick</h1>
-</div>
-
 
 </body>
 </html>

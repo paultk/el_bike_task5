@@ -3,78 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <!--libraries-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
 
-
-    <!--modal-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <script src="static/js/main.js"></script>
+    <script src="static/js/main.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
 <body>
-<div class="wrapper">
-    <h1>Trondheim Bike Rental Services</h1>
-    <hr>
-    <h2>Select pickup point</h2>
-    <select id="mySelect2">
-        <option>Gløshaugen</option>
-        <option>Dragvoll</option>
-        <option>Kalvskinnet</option>
-        <option>Torget</option>
-    </select>
-    <button id="myButton">see available bikes</button>
 
-    <div id="reserve">
-        <h2 id="bikeName"></h2>
-        <input name="code" id="codeInput2" type="text" placeholder="Code">
-        <button id="codeForSubmit2" type="button" class="btn btn-default" >Enter</button>
+
+<div class="container">
+
+    <div class="pickup table table-bordered table-condensed table-striped table-hover">
+        <h1>Choose your location</h1>
+        <table id="pickUpTable">
+
+        </table>
     </div>
+    <div class="bikes">
+        <h1>Available bikes</h1>
+        <table id="bikesRows">
+        </table>
+    </div>
+    <div class="nameBooking">
+        <h1>Your booking</h1>
+        <input name="name" type="text" id="name">
+        <input name="email" type="email" id="email">
+        <button id="confirmButton">Book bike</button>
 
-    <table id="myTable" class="display">
-        <thead>
-        <tr><th>name</th><th>battery</th><th>id</th><th>available</th><th id="book">book</th>
-        </tr>
-        </thead>
-    </table>
-</div>
+        <div id="givenCodeDiv">
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 id="modalHeader" class="modal-title">New booking</h4>
-            </div>
-            <div class="modal-body">
-                <div id="bookingForm">
-                    <form name="myForm1" id="myForm">
-                        <input type="text" name="user" placeholder="Name">
-                    </form>
-                </div>
-                <div>
-                    <h4 id="codeText"></h4>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="bookModalButton" type="button" class="btn btn-default" >Book</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
         </div>
-
     </div>
+
 </div>
 
 </body>
